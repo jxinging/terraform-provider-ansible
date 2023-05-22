@@ -504,9 +504,10 @@ func resourcePlaybookUpdate(data *schema.ResourceData, meta interface{}) error {
 
 	if runAnsiblePlayErr != nil {
 		playbookFailMsg := fmt.Sprintf("ERROR [ansible-playbook]: couldn't run ansible-playbook\n%s! "+
-			"There may be an error within your playbook.\n%v",
+			"There may be an error within your playbook.\n%v\n%v",
 			playbook,
 			runAnsiblePlayErr,
+			string(runAnsiblePlayOut),
 		)
 		if !ignorePlaybookFailure {
 			log.Fatal(playbookFailMsg)
